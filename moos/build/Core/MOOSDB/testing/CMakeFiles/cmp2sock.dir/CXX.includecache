@@ -1,0 +1,170 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/MOOSDB/testing/cmp2sock.cpp
+MOOS/libMOOS/Utils/CommandLineParser.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/MOOSDB/testing/MOOS/libMOOS/Utils/CommandLineParser.h
+MOOS/libMOOS/Comms/XPCTcpSocket.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/MOOSDB/testing/MOOS/libMOOS/Comms/XPCTcpSocket.h
+MOOS/libMOOS/Utils/MOOSUtilityFunctions.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/MOOSDB/testing/MOOS/libMOOS/Utils/MOOSUtilityFunctions.h
+MOOS/libMOOS/Utils/ThreadPrint.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/MOOSDB/testing/MOOS/libMOOS/Utils/ThreadPrint.h
+fstream
+-
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Comms/include/MOOS/libMOOS/Comms/XPCException.h
+cstring
+-
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Comms/include/MOOS/libMOOS/Comms/XPCGetHostInfo.h
+XPCException.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Comms/include/MOOS/libMOOS/Comms/XPCException.h
+arpa/inet.h
+-
+netdb.h
+-
+netinet/in.h
+-
+sys/socket.h
+-
+winsock2.h
+-
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Comms/include/MOOS/libMOOS/Comms/XPCGetProtocol.h
+netdb.h
+-
+winsock2.h
+-
+XPCException.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Comms/include/MOOS/libMOOS/Comms/XPCException.h
+MOOS/libMOOS/Utils/MOOSScopedLock.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Comms/include/MOOS/libMOOS/Comms/MOOS/libMOOS/Utils/MOOSScopedLock.h
+string
+-
+vector
+-
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Comms/include/MOOS/libMOOS/Comms/XPCSocket.h
+MOOS/libMOOS/Comms/XPCGetProtocol.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Comms/include/MOOS/libMOOS/Comms/MOOS/libMOOS/Comms/XPCGetProtocol.h
+MOOS/libMOOS/Comms/XPCGetHostInfo.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Comms/include/MOOS/libMOOS/Comms/MOOS/libMOOS/Comms/XPCGetHostInfo.h
+stdio.h
+-
+sys/socket.h
+-
+unistd.h
+-
+fcntl.h
+-
+errno.h
+-
+iostream
+-
+sys/types.h
+-
+sys/ioctl.h
+-
+netinet/tcp.h
+-
+winsock2.h
+-
+windows.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Comms/include/MOOS/libMOOS/Comms/windows.h
+winbase.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Comms/include/MOOS/libMOOS/Comms/winbase.h
+winnt.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Comms/include/MOOS/libMOOS/Comms/winnt.h
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Comms/include/MOOS/libMOOS/Comms/XPCTcpSocket.h
+XPCSocket.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Comms/include/MOOS/libMOOS/Comms/XPCSocket.h
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/getpot/include/MOOS/libMOOS/Thirdparty/getpot/GetPot.hpp
+ctype.h
+-
+stdio.h
+-
+stdarg.h
+-
+assert.h
+-
+string.h
+-
+cmath
+-
+string
+-
+vector
+-
+algorithm
+-
+sstream
+-
+fstream
+-
+iostream
+-
+stdexcept
+-
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/CommandLineParser.h
+MOOS/libMOOS/Utils/MOOSScopedPtr.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOS/libMOOS/Utils/MOOSScopedPtr.h
+vector
+-
+string
+-
+stdint.h
+-
+MOOS/libMOOS/Utils/CommandLineParser.hxx
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOS/libMOOS/Utils/CommandLineParser.hxx
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/CommandLineParser.hxx
+MOOS/libMOOS/Thirdparty/getpot/GetPot.hpp
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOS/libMOOS/Thirdparty/getpot/GetPot.hpp
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOSLock.h
+windows.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/windows.h
+winbase.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/winbase.h
+winnt.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/winnt.h
+pthread.h
+-
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOSScopedLock.h
+MOOS/libMOOS/Utils/MOOSLock.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOS/libMOOS/Utils/MOOSLock.h
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOSScopedPtr.h
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOSUtilityFunctions.h
+stdint.h
+-
+cmath
+-
+string
+-
+list
+-
+vector
+-
+sstream
+-
+algorithm
+-
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/ThreadPrint.h
+iostream
+-
+string
+-
+

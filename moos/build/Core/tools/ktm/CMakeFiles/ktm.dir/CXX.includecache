@@ -1,0 +1,298 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Comms/include/MOOS/libMOOS/Comms/MulticastNode.h
+vector
+-
+MOOS/libMOOS/Utils/SafeList.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Comms/include/MOOS/libMOOS/Comms/MOOS/libMOOS/Utils/SafeList.h
+MOOS/libMOOS/Utils/MOOSThread.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Comms/include/MOOS/libMOOS/Comms/MOOS/libMOOS/Utils/MOOSThread.h
+MOOS/libMOOS/Utils/IPV4Address.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Comms/include/MOOS/libMOOS/Comms/MOOS/libMOOS/Utils/IPV4Address.h
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Comms/include/MOOS/libMOOS/Comms/SuicidalSleeper.h
+string
+-
+MOOS/libMOOS/Utils/MemberFuncBinding.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Comms/include/MOOS/libMOOS/Comms/MOOS/libMOOS/Utils/MemberFuncBinding.h
+MOOS/libMOOS/Utils/MOOSThread.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Comms/include/MOOS/libMOOS/Comms/MOOS/libMOOS/Utils/MOOSThread.h
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/Bugcheck.h
+MOOS/libMOOS/Thirdparty/PocoBits/Foundation.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/Foundation.h
+string
+-
+iostream
+-
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/Config.h
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/Event.h
+MOOS/libMOOS/Thirdparty/PocoBits/Foundation.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/Foundation.h
+MOOS/libMOOS/Thirdparty/PocoBits/Exception.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/Exception.h
+MOOS/libMOOS/Thirdparty/PocoBits/Event_WIN32.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/Event_WIN32.h
+MOOS/libMOOS/Thirdparty/PocoBits/Event_POSIX.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/Event_POSIX.h
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/Event_POSIX.h
+MOOS/libMOOS/Thirdparty/PocoBits/Foundation.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/Foundation.h
+MOOS/libMOOS/Thirdparty/PocoBits/Exception.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/Exception.h
+pthread.h
+-
+errno.h
+-
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/Event_WIN32.h
+MOOS/libMOOS/Thirdparty/PocoBits/Foundation.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/Foundation.h
+MOOS/libMOOS/Thirdparty/PocoBits/Exception.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/Exception.h
+MOOS/libMOOS/Thirdparty/PocoBits/UnWindows.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/UnWindows.h
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/Exception.h
+MOOS/libMOOS/Thirdparty/PocoBits/Foundation.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/Foundation.h
+stdexcept
+-
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/Foundation.h
+MOOS/libMOOS/Thirdparty/PocoBits/Config.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/Config.h
+MOOS/libMOOS/Thirdparty/PocoBits/Platform.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/Platform.h
+MOOS/libMOOS/Thirdparty/PocoBits/Platform_WIN32.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/Platform_WIN32.h
+MOOS/libMOOS/Thirdparty/PocoBits/Platform_VMS.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/Platform_VMS.h
+MOOS/libMOOS/Thirdparty/PocoBits/Platform_POSIX.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/Platform_POSIX.h
+MOOS/libMOOS/Thirdparty/PocoBits/Bugcheck.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/Bugcheck.h
+MOOS/libMOOS/Thirdparty/PocoBits/Types.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/Types.h
+string
+-
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/Mutex.h
+MOOS/libMOOS/Thirdparty/PocoBits/Foundation.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/Foundation.h
+MOOS/libMOOS/Thirdparty/PocoBits/Exception.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/Exception.h
+MOOS/libMOOS/Thirdparty/PocoBits/ScopedLock.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/ScopedLock.h
+MOOS/libMOOS/Thirdparty/PocoBits/Mutex_WIN32.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/Mutex_WIN32.h
+MOOS/libMOOS/Thirdparty/PocoBits/Mutex_POSIX.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/Mutex_POSIX.h
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/Mutex_POSIX.h
+MOOS/libMOOS/Thirdparty/PocoBits/Foundation.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/Foundation.h
+MOOS/libMOOS/Thirdparty/PocoBits/Exception.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/Exception.h
+pthread.h
+-
+errno.h
+-
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/Mutex_WIN32.h
+MOOS/libMOOS/Thirdparty/PocoBits/UnWindows.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/UnWindows.h
+MOOS/libMOOS/Thirdparty/PocoBits/Foundation.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/Foundation.h
+MOOS/libMOOS/Thirdparty/PocoBits/Exception.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/Exception.h
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/Platform.h
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/Platform_POSIX.h
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/Platform_VMS.h
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/Platform_WIN32.h
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/ScopedLock.h
+MOOS/libMOOS/Thirdparty/PocoBits/Foundation.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/Foundation.h
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/Types.h
+MOOS/libMOOS/Thirdparty/PocoBits/Foundation.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/MOOS/libMOOS/Thirdparty/PocoBits/Foundation.h
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/PocoBits/include/MOOS/libMOOS/Thirdparty/PocoBits/UnWindows.h
+windows.h
+-
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/getpot/include/MOOS/libMOOS/Thirdparty/getpot/GetPot.hpp
+ctype.h
+-
+stdio.h
+-
+stdarg.h
+-
+assert.h
+-
+string.h
+-
+cmath
+-
+string
+-
+vector
+-
+algorithm
+-
+sstream
+-
+fstream
+-
+iostream
+-
+stdexcept
+-
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/CommandLineParser.h
+MOOS/libMOOS/Utils/MOOSScopedPtr.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOS/libMOOS/Utils/MOOSScopedPtr.h
+vector
+-
+string
+-
+stdint.h
+-
+MOOS/libMOOS/Utils/CommandLineParser.hxx
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOS/libMOOS/Utils/CommandLineParser.hxx
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/CommandLineParser.hxx
+MOOS/libMOOS/Thirdparty/getpot/GetPot.hpp
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOS/libMOOS/Thirdparty/getpot/GetPot.hpp
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/ConsoleColours.h
+windows.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/windows.h
+winbase.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/winbase.h
+winnt.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/winnt.h
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/IPV4Address.h
+stdint.h
+-
+string
+-
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOSLock.h
+windows.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/windows.h
+winbase.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/winbase.h
+winnt.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/winnt.h
+pthread.h
+-
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOSScopedLock.h
+MOOS/libMOOS/Utils/MOOSLock.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOS/libMOOS/Utils/MOOSLock.h
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOSScopedPtr.h
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOSThread.h
+MOOS/libMOOS/Utils/MOOSLock.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOS/libMOOS/Utils/MOOSLock.h
+MOOS/libMOOS/Utils/MOOSScopedLock.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOS/libMOOS/Utils/MOOSScopedLock.h
+MOOS/libMOOS/Utils/MOOSUtilityFunctions.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOS/libMOOS/Utils/MOOSUtilityFunctions.h
+iostream
+-
+errno.h
+-
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOSUtilityFunctions.h
+stdint.h
+-
+cmath
+-
+string
+-
+list
+-
+vector
+-
+sstream
+-
+algorithm
+-
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MemberFuncBinding.h
+string
+-
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/SafeList.h
+list
+-
+MOOS/libMOOS/Thirdparty/PocoBits/ScopedLock.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOS/libMOOS/Thirdparty/PocoBits/ScopedLock.h
+MOOS/libMOOS/Thirdparty/PocoBits/Event.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOS/libMOOS/Thirdparty/PocoBits/Event.h
+MOOS/libMOOS/Thirdparty/PocoBits/Mutex.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOS/libMOOS/Thirdparty/PocoBits/Mutex.h
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/ThreadPrint.h
+iostream
+-
+string
+-
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/tools/ktm/ktm.cpp
+sys/time.h
+-
+sys/types.h
+-
+unistd.h
+-
+sys/socket.h
+-
+sys/select.h
+-
+arpa/inet.h
+-
+winsock2.h
+-
+stdio.h
+-
+stdlib.h
+-
+string
+-
+cstring
+-
+stdexcept
+-
+MOOS/libMOOS/Utils/CommandLineParser.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/tools/ktm/MOOS/libMOOS/Utils/CommandLineParser.h
+MOOS/libMOOS/Utils/ThreadPrint.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/tools/ktm/MOOS/libMOOS/Utils/ThreadPrint.h
+MOOS/libMOOS/Utils/MOOSUtilityFunctions.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/tools/ktm/MOOS/libMOOS/Utils/MOOSUtilityFunctions.h
+MOOS/libMOOS/Utils/ConsoleColours.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/tools/ktm/MOOS/libMOOS/Utils/ConsoleColours.h
+MOOS/libMOOS/Comms/MulticastNode.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/tools/ktm/MOOS/libMOOS/Comms/MulticastNode.h
+MOOS/libMOOS/Comms/SuicidalSleeper.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/tools/ktm/MOOS/libMOOS/Comms/SuicidalSleeper.h
+

@@ -1,0 +1,124 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Comms/include/MOOS/libMOOS/Comms/SuicidalSleeper.h
+string
+-
+MOOS/libMOOS/Utils/MemberFuncBinding.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Comms/include/MOOS/libMOOS/Comms/MOOS/libMOOS/Utils/MemberFuncBinding.h
+MOOS/libMOOS/Utils/MOOSThread.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Comms/include/MOOS/libMOOS/Comms/MOOS/libMOOS/Utils/MOOSThread.h
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Thirdparty/getpot/include/MOOS/libMOOS/Thirdparty/getpot/GetPot.hpp
+ctype.h
+-
+stdio.h
+-
+stdarg.h
+-
+assert.h
+-
+string.h
+-
+cmath
+-
+string
+-
+vector
+-
+algorithm
+-
+sstream
+-
+fstream
+-
+iostream
+-
+stdexcept
+-
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/CommandLineParser.h
+MOOS/libMOOS/Utils/MOOSScopedPtr.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOS/libMOOS/Utils/MOOSScopedPtr.h
+vector
+-
+string
+-
+stdint.h
+-
+MOOS/libMOOS/Utils/CommandLineParser.hxx
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOS/libMOOS/Utils/CommandLineParser.hxx
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/CommandLineParser.hxx
+MOOS/libMOOS/Thirdparty/getpot/GetPot.hpp
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOS/libMOOS/Thirdparty/getpot/GetPot.hpp
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOSLock.h
+windows.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/windows.h
+winbase.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/winbase.h
+winnt.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/winnt.h
+pthread.h
+-
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOSScopedLock.h
+MOOS/libMOOS/Utils/MOOSLock.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOS/libMOOS/Utils/MOOSLock.h
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOSScopedPtr.h
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOSThread.h
+MOOS/libMOOS/Utils/MOOSLock.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOS/libMOOS/Utils/MOOSLock.h
+MOOS/libMOOS/Utils/MOOSScopedLock.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOS/libMOOS/Utils/MOOSScopedLock.h
+MOOS/libMOOS/Utils/MOOSUtilityFunctions.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOS/libMOOS/Utils/MOOSUtilityFunctions.h
+iostream
+-
+errno.h
+-
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MOOSUtilityFunctions.h
+stdint.h
+-
+cmath
+-
+string
+-
+list
+-
+vector
+-
+sstream
+-
+algorithm
+-
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/MemberFuncBinding.h
+string
+-
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Utils/include/MOOS/libMOOS/Utils/ThreadPrint.h
+iostream
+-
+string
+-
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/testing/SuicideTest.cpp
+MOOS/libMOOS/Utils/CommandLineParser.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/testing/MOOS/libMOOS/Utils/CommandLineParser.h
+MOOS/libMOOS/Comms/SuicidalSleeper.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/testing/MOOS/libMOOS/Comms/SuicidalSleeper.h
+MOOS/libMOOS/Utils/ThreadPrint.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/testing/MOOS/libMOOS/Utils/ThreadPrint.h
+MOOS/libMOOS/Utils/MOOSUtilityFunctions.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/testing/MOOS/libMOOS/Utils/MOOSUtilityFunctions.h
+

@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Comms/include/MOOS/libMOOS/Comms/MOOSMsg.h
+string
+-
+vector
+-
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/Comms/include/MOOS/libMOOS/Comms/MessageFunction.h
+vector
+-
+
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/testing/BindingTest.cpp
+MOOS/libMOOS/Comms/MessageFunction.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/testing/MOOS/libMOOS/Comms/MessageFunction.h
+MOOS/libMOOS/Comms/MOOSMsg.h
+/Users/steffen/OneDrive - Nexus365/Code/Mobile Robotics/codebase/moos/src/Core/libMOOS/testing/MOOS/libMOOS/Comms/MOOSMsg.h
+stdexcept
+-
+iostream
+-
+
