@@ -1,0 +1,7 @@
+
+startup_cdt\.m
+
+moos/
+mexmoos/
+
+*.m~

@@ -32,7 +32,7 @@ if (~(isnumeric(omega) && isscalar(vel) && ~isempty(omega)))
     error('%s - omega must be a non-empty scalar double.', mfilename);
 end
 if (~(ischar(moos_channel) && ~isempty(moos_channel)))
-    error('%s - moos_channel must be a non-empty string.', mfilename);
+    error('%s - 2w must be a non-empty string.', mfilename);
 end
 
 % warn if limits exceeded
