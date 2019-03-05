@@ -1,4 +1,4 @@
-function collision = checkCollision(sourceNode, targetNode, poles)
+function collision = checkCollision(sourceNode, targetNode, poles, r)
 %CHECKOBSTRUCTION Check whether a line given by source and target is
 %colliding with any of the poles
 %   Assumes poles list as (2,n), and sourceNode, targetNode as 2d row
@@ -8,7 +8,6 @@ function collision = checkCollision(sourceNode, targetNode, poles)
 lineSeg = [sourceNode; targetNode];
 % assume poles in (2,n)
 % TODO check radius
-r = 0.1;
 d = diff(lineSeg,1,1);
 f = lineSeg(1,:) - poles';
 
@@ -26,8 +25,8 @@ potCollision = discriminant > 0;
 % only change to 0?
 if ~any(potCollision)
     collision = 0;
-    disp('here')
 else
+    discriminant = sqrt(discriminant);
     t1 = (-b(potCollision) - discriminant(potCollision))/(2*a);
     t2 = (-b(potCollision) + discriminant(potCollision))/(2*a);
     % 3x HIT cases:
