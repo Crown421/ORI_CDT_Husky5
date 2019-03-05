@@ -24,7 +24,7 @@ gamma = atan2(RT_r(2, 1), RT_r(1, 1));
 % 
 % forward error
 for_error = RT_r(1, 1);
-% put a buffer intercept angle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if abs(gamma) > 0.1
     
     gain_forward = 0.1;

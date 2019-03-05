@@ -11,7 +11,7 @@ u_robot = x_robot(1:2, :);
 gamma = x_robot(1, :);
 for_error = gamma;
 
-target_pose = [1; 0.8; 0.1];
+target_pose = [1; 5; 0.1];
 
 figure
 for k = 1 : no_steps-1
