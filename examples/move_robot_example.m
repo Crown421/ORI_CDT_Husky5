@@ -6,7 +6,8 @@
 addpath('mrg');
 
 % Set the Husky ID
-husky_id = 4;
+
+husky_id = 5;
 
 % Get the Husky configuration, including the MOOS channel names.
 husky_config = GetHuskyConfig(husky_id);
@@ -21,7 +22,8 @@ pause(1.0); % give mexmoos a chance to connect (important!)
 SendSpeedCommand(0, 0, husky_config.control_channel)
 
 i = 0;
-velocity = 0.3;
+
+velocity = 0.0;
 
 while true
     disp('Send command');

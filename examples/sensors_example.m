@@ -9,7 +9,8 @@
 % Add MRG helper functions
 % addpath('mrg'); % COMMENTED OUT
 
-husky_id = 3; % Modify for your Husky
+husky_id = 5; % Modify for your Husky
+
 
 % Get the channel names and sensor IDs for this Husky
 config = GetHuskyConfig(husky_id);

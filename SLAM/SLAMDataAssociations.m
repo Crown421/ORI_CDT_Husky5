@@ -32,6 +32,7 @@ function [z] = SLAMDataAssociations(x, z_raw)
       
       %disp(xVehicle);
       
+      % rotation matrix of the robot to world co-ords
       rot_mx = [cos(xVehicle(3)) sin(xVehicle(3));
                 -sin(xVehicle(3)) cos(xVehicle(3))];
           
