@@ -12,8 +12,10 @@ if ~isempty(z_raw)
     z = SLAMDataAssociations(x_pred, z_raw');
     [x_new, P_new] = SLAMMeasurement(z, x_pred, P_pred);
 else
-    x_new = x;
-    P_new = P;
+    % just do prediction with old map and no new data
+    [x_new, P_new] = SLAMPrediction(u, x, P);
+%     x_new = x;
+%     P_new = P;
 end
 
 end

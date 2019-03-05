@@ -6,7 +6,7 @@ setup
 global config  %#ok
 %%
 seq = 0;
-state = zeros(1,3); % initial position
+state = zeros(3, 1); % initial position
 P = zeros(3,3);
 estMotion = zeros(1,3);
 while notAtTarget
@@ -21,19 +21,25 @@ while notAtTarget
     end
     
     % lidar processing
-    candidatePoles = FindPoles(scan);
+    range_bearing_Poles = FindPoles(scan);
     
     % slam
-    observedPoles = SLAMDataAssociations(x, candidatePoles);
-    [estState, estP] = SLAMMeasurement(observedPoles, state, P);
-    [state, P] = SLAMUpdate(estMotion, observedPoles, estState, estP);
+%     observedPoles = SLAMDataAssociations(x, candidatePoles);
+%     [estState, estP] = SLAMMeasurement(observedPoles, state, P);
+    [state, P] = SLAMUpdate(estMotion, range_bearing_Poles, state, P);
     
     % planner
     goal = nextGoal(state, targetLocation, mode);
     
-    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % controller added
+    max_gain_intercpt = 0.8;
+    max_gain_forward = 0.8;
+    % p contrller
+    uctrl = pid_ctrl(goal, state(1:3, 1), max_gain_intercpt, max_gain_forward);
     % other things
-    SendSpeedCommand()
+    SendSpeedCommand(uctrl(1, 1), uctrl(2, 1), husky_config.control_channel)
+    
 end
 
 %% shutdown
