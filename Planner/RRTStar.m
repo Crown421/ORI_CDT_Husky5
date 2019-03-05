@@ -3,6 +3,7 @@ function [points, adjGraph] = RRTStar(poles, r, initialState, iters, near, goal,
 %   poles = [x1,y1;x2,y2;....], initalState = [x,y]
 points = [initialState];
 adjGraph = [0];
+distFromInitial = [0];
 for i = 1:iters
     %sample a random point
     [x,y] = sample(goalBias, goal);
@@ -15,13 +16,31 @@ for i = 1:iters
     steerToward = near/norm(randPoint-nearestPoint)*(randPoint-nearestPoint);
     newPoint = nearestPoint + steerToward;
     if ~checkCollision(nearestPoint, newPoint, poles', r)
+       %SELECT BEST PARENT
+       %pick smartestPointIndex
+       newDist = sqrt(sum((points-newPoint).^2,2));
+       nearPoints = newDist<1.5*near;
+       M = min(distFromInitial(nearPoints));
+       smartestPoints = find(distFromInitial==M);
+       smartestPointIndex = smartestPoints(1) ;
+       smartestPoint = points(smartestPointIndex,:);
+       newDist(smartestPointIndex);
+       %add newPoint to points, adjGraph and distFromIntial
        points = [points; newPoint];
        [n,m] = size(points);
        newCol = zeros(n-1,1);
-       newCol(nearestPointIndex,1)=1;
+       newCol(smartestPointIndex,1)=1;
        newRow = zeros(1,n);
-       newRow(1, nearestPointIndex,1)=1;
+       newRow(1, smartestPointIndex,1)=1;
        adjGraph = [adjGraph, newCol; newRow];
+       parentDist = distFromInitial(smartestPointIndex);
+       edgeDist = parentDist + sqrt(sum((smartestPoint-newPoint).^2,2));
+       distFromInitial = [distFromInitial; edgeDist];
+       %REFACTOR NEAR NODES\
+       %proposedDist = edgeDist + newDist;
+       %betterOptions = proposedDist < distFromInitial;
+       %newChildren = betterOptions & nearPoints;
+       %sum(newChildren)
     end
 end
 figure(1); 
