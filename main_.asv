@@ -26,10 +26,7 @@ while notAtTarget
     % slam
     observedPoles = SLAMDataAssociations(x, candidatePoles);
     [estState, estP] = SLAMMeasurement(observedPoles, state, P);
-    [state, P] = SLAMUpdate(estMotion, observedPoles, estState, estP);
     
-    % planner
-    goal = nextGoal(state, targetLocation, mode);
     
     
     % other things
