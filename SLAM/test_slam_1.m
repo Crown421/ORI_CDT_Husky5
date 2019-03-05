@@ -52,7 +52,7 @@ for k = 1 : no_steps-1
     u_ctrl = [0.1; 0.1];
     [x_robot(:, k+1), u_odom] = basic_robot_plant(x_robot(:, k), u_ctrl, Ts);
     % update odoemtry
-    u = u_odom;
+    u = u_odom/Ts;
     % get noisy robot measurements
     z_raw = sysnth_z_raw(true_beacon_pos, x_robot(:, k));
     z_raw = z_raw + 0.01*randn(size(z_raw));

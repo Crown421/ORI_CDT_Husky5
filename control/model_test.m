@@ -11,12 +11,12 @@ u_robot = x_robot(1:2, :);
 gamma = x_robot(1, :);
 for_error = gamma;
 
-target_pose = [1; 5; 0.1];
+target_pose = [-1; 5; 0.1];
 
 figure
 for k = 1 : no_steps-1
     
-    [u_ctrl, gamma(:, k), for_error(:, k)] = pid_ctrl(target_pose, x_robot(:, k), 0.8, 0.8);
+    [u_ctrl, gamma(:, k), for_error(:, k)] = pid_ctrl(target_pose, x_robot(:, k), 0.5, 0.5);
 %     u_ctrl = [0.1; 0.1];
     
     u_robot(:, k) = u_ctrl;
