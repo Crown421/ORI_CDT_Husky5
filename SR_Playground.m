@@ -94,13 +94,16 @@ plot(colPoles(1, idx), colPoles(2, idx), 'x');
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % route planning
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
 state = [0,0,0];
 rPlan = plan(state, area);
 %
-rPlan.buildTree(poles);
-%
+rPlan.buildTreeStar(poles);
+%%
 rPlan.Astar(state)
+
+%%
 %
 figure(4); clf;
 viscircles(poles', rPlan.radius*ones(1,length(poles)));
@@ -119,8 +122,7 @@ y = [rPlan.tree.points(I, 2)'; rPlan.tree.points(J,2)'];
 line(x, y, 'Color', [0.4 0.4 0.4 0.4]);
 plot(rPlan.target.coords(1), rPlan.target.coords(2), 'o')
 
-%%
-%%
+%
 srcidx = rPlan.path(1:end-1);
 tgtidx = rPlan.path(2:end);
 x = [rPlan.tree.points(srcidx, 1)'; rPlan.tree.points(tgtidx,1)'];
