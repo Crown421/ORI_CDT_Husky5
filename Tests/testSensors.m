@@ -1,24 +1,27 @@
-% central script
+% write a thing robot integration, while loop with long pause, 
+% grabbing stuff from sensors, 
+% run slam
+% run planner
+% display poles, tree (faint), and path, and robot as point
+% display robot and poles, maybe with confidence circle?, lidar bits
+% display images,
 
 %% setup and init
 setup
 
 global config  %#ok
+
 %%
 seq = 0;
 state = zeros(3, 1); % initial position
 P = zeros(3,3);
 % estMotion = zeros(1,3);
 
-rPlan = plan(state, area);
-%
-rPlan.buildTree(poles);
-%
-rPlan.Astar(state);
-
 bufferLength = 10;
 wheel_odom_buffer = repmat(struct('source_timestamp', 0,'destination_timestamp',0, 'x', 0, 'y', 0, 'yaw', 0), 10, 1);
-while notAtTarget
+
+
+while true
     seq = seq + 1;
     % collect sensors
     scan = GetLaserScans(mailbox, config.laser_channel, true);
@@ -36,7 +39,6 @@ while notAtTarget
         targetLocation = FindTarget(stereo_images);
     end
     
-    % lidar processing
     range_bearing_Poles = FindPoles(scan);
     
     % slam
@@ -44,18 +46,12 @@ while notAtTarget
 %     [estState, estP] = SLAMMeasurement(observedPoles, state, P);
     [state, P] = SLAMUpdate(u_odom, range_bearing_Poles, state, P);
     
-    % planner
-    goal = rPlan.findGoal(state);
     
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    % controller added
-    max_gain_intercpt = 0.8;
-    max_gain_forward = 0.8;
-    % p contrller
-    uctrl = pid_ctrl(goal, state(1:3, 1), max_gain_intercpt, max_gain_forward);
-    % other things
-    SendSpeedCommand(uctrl(1, 1), uctrl(2, 1), husky_config.control_channel)
+    
+    
+    pause(2);
+    
+    
+    
     
 end
-
-%% shutdown
