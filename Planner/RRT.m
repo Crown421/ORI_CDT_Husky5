@@ -33,31 +33,7 @@ y = [points(I, 2)'; points(J,2)'];
 line(x, y, 'Color', [0.4 0.4 0.4 0.4]);
 hold on 
 viscircles(poles, r*ones(1,length(poles')));
-xlim([0 11])
-ylim([0 11])
+xlim([-5 5])
+ylim([-1 6])
 end
-
-
-function [x,y] = sample(goalBias, goal)
-    sampleChoice = rand;
-    if sampleChoice < goalBias 
-        [x,y] = goalSample(goal);
-    else
-        [x,y] = spaceSample();
-    end
-end
-
-function [x,y] = spaceSample()
-    x = 10*rand();
-    y = 10*rand();
-end
-
-function [x,y] = goalSample(goal)
-    [m,n] = size(goal);
-    which = randi(m);
-    point = goal(which,:);
-    x= point(1);
-    y = point(2);
-end
-
 
