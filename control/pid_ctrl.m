@@ -38,7 +38,8 @@ else
 end
 
 if abs(for_error) < 0.2
-    gain_intercpt = 0.01;
+    
+    gain_intercpt = 0.1;
     
 end
 
