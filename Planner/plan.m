@@ -23,6 +23,8 @@ classdef plan < handle
             self.tree.points = state(1:2);
             self.tree.adj = sparse(0);
             self.tree.nrP = 1;
+            self.tree.distFromInit = 0;
+            self.tree.parents = 0;
             self.mode = targetMode.findTarget;
             self.area = area;
             self.path = [];
@@ -58,7 +60,7 @@ classdef plan < handle
             self.tree.points = state(1:2);
             self.tree.adj = sparse(0);
             self.tree.nrP = 1;
-            self.buildTree(poles)
+            self.buildTreeStar(poles)
             
             self.Astar(state);
             
@@ -129,22 +131,22 @@ classdef plan < handle
 
 
 function buildTreeStar(self, poles)
-            [row,col,v] = find(self.tree.adj)
+            [row,col,v] = find(self.tree.adj);
             nP = self.tree.nrP;
             self.tree.adj = sparse(row,col,v, nP+self.iters, nP+self.iters, nP+self.iters^2);
             
             distFromInit = 0;
             parents = 0;
             
-            %%%
-            figure(40); clf;
-            viscircles(poles', self.radius*ones(1,length(poles)));
-            axis equal
-            hold on
-            scatter(self.tree.points(:,1), self.tree.points(:,2), 10, 'filled');
-            xlim(self.area(1,:)+[0,1])
-            ylim(self.area(2,:))
-            %%%
+%             %%%
+%             figure(40); clf;
+%             viscircles(poles', self.radius*ones(1,length(poles)));
+%             axis equal
+%             hold on
+%             scatter(self.tree.points(:,1), self.tree.points(:,2), 10, 'filled');
+%             xlim(self.area(1,:)+[0,1])
+%             ylim(self.area(2,:))
+%             %%%
             
             for i = 1:self.iters
                 candPoint = self.sample(self.goalBias, []);
@@ -161,19 +163,19 @@ function buildTreeStar(self, poles)
                 
                 if (closest > self.ptHorizon*0.5 ) && ~checkCollision(nearestPoint, newPoint, poles, self.radius)
                     
-                    %%%
-                    plot(newPoint(1), newPoint(2), 'ro');
-                    %pause(0.2);
-                    %%%
+%                     %%%
+%                     plot(newPoint(1), newPoint(2), 'ro');
+%                     %pause(0.2);
+%                     %%%
                 
                     % find points within distance
                     nearPointsLdx = newDist < 1.5*self.ptHorizon;
                     
-                    %%%
-                    figure(40);
-                    plot(self.tree.points(nearPointsLdx,1), self.tree.points(nearPointsLdx,2), 'yo')
-                    % pause(0.2)
-                    %%%
+%                     %%%
+%                     figure(40);
+%                     plot(self.tree.points(nearPointsLdx,1), self.tree.points(nearPointsLdx,2), 'yo')
+%                     % pause(0.2)
+%                     %%%
                     
                     % find nearby point with smallest distance to start
                     [minDist] = min(distFromInit(nearPointsLdx));
@@ -206,16 +208,16 @@ function buildTreeStar(self, poles)
                     newPointDistInit = distFromInit(nearestPointIndex) + newDist(nearestPointIndex);
                     distFromInit = [distFromInit, newPointDistInit];
                     
-                    %%%
-                    figure(40)
-                    plot(nearestPoint(1), nearestPoint(2), 'rx');
-                    
-                    x = [self.tree.points(nearestPointIndex, 1)'; self.tree.points(self.tree.nrP,1)'];
-                    y = [self.tree.points(nearestPointIndex, 2)'; self.tree.points(self.tree.nrP,2)'];
-                    line(x, y, 'Color', [0.4 0.4 0.4 0.9]);
-                    %pause(0.2)
-                    
-                    %%%
+%                     %%%
+%                     figure(40)
+%                     plot(nearestPoint(1), nearestPoint(2), 'rx');
+%                     
+%                     x = [self.tree.points(nearestPointIndex, 1)'; self.tree.points(self.tree.nrP,1)'];
+%                     y = [self.tree.points(nearestPointIndex, 2)'; self.tree.points(self.tree.nrP,2)'];
+%                     line(x, y, 'Color', [0.4 0.4 0.4 0.9]);
+%                     %pause(0.2)
+%                     
+%                     %%%
                     
                     
                     
@@ -229,12 +231,12 @@ function buildTreeStar(self, poles)
                         for toChangeIdx = find(newChildren)
                             if ~checkCollision(self.tree.points(toChangeIdx,:), newPoint,poles, self.radius)
                                 
-                                %%%
-                                x = [self.tree.points(toChangeIdx, 1)'; self.tree.points(self.tree.nrP,1)'];
-                                y = [self.tree.points(toChangeIdx, 2)'; self.tree.points(self.tree.nrP,2)'];
-                                line(x, y, 'Color', 'red', 'LineWidth', 2);
-                                pause(0.2)
-                                %%%
+%                                 %%%
+%                                 x = [self.tree.points(toChangeIdx, 1)'; self.tree.points(self.tree.nrP,1)'];
+%                                 y = [self.tree.points(toChangeIdx, 2)'; self.tree.points(self.tree.nrP,2)'];
+%                                 line(x, y, 'Color', 'red', 'LineWidth', 2);
+%                                 pause(0.2)
+%                                 %%%
                                 
                                 self.tree.adj(toChangeIdx, self.tree.nrP) = 1;
                                 self.tree.adj(self.tree.nrP, toChangeIdx) = 1;
@@ -303,7 +305,7 @@ function buildTreeStar(self, poles)
                 Gscore(startIdx) = 0;
                 % heuristic, simple distance to target
                 Fscore = nan(1, self.tree.nrP);
-                Fscore(startIdx) = norm(self.target.coords- self.tree.points(startIdx) );
+                Fscore(startIdx) = norm(self.target.coords(candTargetIdx, :)- self.tree.points(startIdx) );
                 
                 while ~isempty(open)
                     % current should index on whole point list
@@ -329,7 +331,7 @@ function buildTreeStar(self, poles)
                             continue
                         end
                         
-                        prelimScore = Gscore(current) + norm(self.tree.points(current) - self.tree.points(neighbour));
+                        prelimScore = Gscore(current) + norm(self.tree.points(current, :) - self.tree.points(neighbour, :));
                         
                         if ~ismember(neighbour, open)
                             open = [open, neighbour];
@@ -339,7 +341,7 @@ function buildTreeStar(self, poles)
                         
                         cameFrom(neighbour) = current;
                         Gscore(neighbour) = prelimScore;
-                        Fscore(neighbour) = Gscore(neighbour) + norm(self.target.coords-self.tree.points(neighbour));
+                        Fscore(neighbour) = Gscore(neighbour) + norm(self.target.coords(candTargetIdx, :)-self.tree.points(neighbour, :));
                         
                         
                     end
