@@ -5,13 +5,17 @@ classdef plan < handle
     properties%(Access = private)
         tree
         path
+        pathLength
         target
+        sampleArea
         mode %initialise as targetMode enum
         area
         radius = 0.2;
         iters = 500;
         goalBias = 0.4;
         ptHorizon = 0.4;
+        converge = 0.9999;
+        goalCounter
         %tooClose = 0.2;
     end
     
@@ -23,15 +27,18 @@ classdef plan < handle
             self.tree.points = state(1:2);
             self.tree.adj = sparse(0);
             self.tree.nrP = 1;
-            self.tree.distFromInit = 0;
-            self.tree.parents = 0;
+            self.tree.distFromInit = [0];
+            self.tree.parents = [0];
             self.mode = targetMode.findTarget;
             self.area = area;
+            self.sampleArea = area;
             self.path = [];
+            self.pathLength = -1;
             nTargets = 6;
             self.target.coords = [self.area(1,2)*ones(nTargets,1),linspace(self.area(2,1)*0.7, self.area(2,2)*0.7, nTargets)'] ;
             self.target.idx = zeros(1,nTargets);
             self.mode = targetMode.findTarget;
+            self.goalCounter = 2;
 
         end
         
@@ -39,11 +46,24 @@ classdef plan < handle
             %findGoal Find the next goal given the state between replanning
             %   Detailed explanation goes here
             % TODO: better tracking of which goals were already passed
-            candGoalsIdx = self.path(self.tree.points(self.path,1)>state(1));
-            candGoals = self.tree.points(candGoalsIdx, :);
-            dist = sqrt(sum((candGoals - state(1:2)).^2,2));
-            [~, nextGoalIdx] = min(dist);
-            nextGoal = candGoals(nextGoalIdx);
+            %candGoalsIdx = self.path(self.tree.points(self.path,1)>state(1));
+            %candGoals = self.tree.points(candGoalsIdx, :);
+            %dist = sqrt(sum((candGoals - state(1:2)).^2,2));
+            %[~, nextGoalIdx] = min(dist);
+            %nextGoal = candGoals(nextGoalIdx);
+            %robotLoc = [state(1), state(2)];
+            %lastGoalIndex=self.path(self.goalCounter);
+            %lastGoal = self.tree.points(lastGoalIndex,:);
+            %futureGoal = self.tree.points(self.path(self.goalCounter+1),:);
+            %distToLastGoal = sqrt(sum((lastGoal - robotLoc).^2,2));
+            %distToFutureGoal = sqrt(sum((futureGoal - robotLoc).^2,2));
+            %if distToFutureGoal < distToLastGoal
+            %    nextGoal=self.tree.points(self.goalCounter+1,:);
+            %    self.goalCounter=self.goalCounter+1;
+            %else
+            %    nextGoal=self.tree.points(self.goalCounter,:);
+            %end
+            %self.goalCounter
         end
         
         
@@ -56,14 +76,43 @@ classdef plan < handle
         function [] = replan(self, state, poles )
             %replan Do replanning
             %   Replan if new poles or the target have shown up
-            
+            self.goalCounter = 2;
             self.tree.points = state(1:2);
             self.tree.adj = sparse(0);
             self.tree.nrP = 1;
             self.buildTreeStar(poles)
-            
             self.Astar(state);
+
+            %possibly seperate full replanning method after mode change
+        end
+        
+        function [] = replanConverge(self, state, poles )
+            %replan Do replanning
+            %   Replan if new poles or the target have shown up
             
+            %initalPlan
+            self.goalCounter = 2;
+            self.tree.points = state(1:2);
+            self.tree.adj = sparse(0);
+            self.tree.nrP = 1;
+            widthScale = .2;
+            self.updateSampleArea(widthScale)
+            self.buildTreeStar(poles)
+            self.Astar(state);
+            prevPathLength = intmax;
+            iterCount = 1;
+
+            
+            %improve until convergence
+            while(self.pathLength/prevPathLength<self.converge && iterCount<20)
+                iterCount=iterCount+1
+                prevPathLength = self.pathLength;
+                self.updateSampleArea(widthScale*iterCount)
+                self.buildTreeStar(poles)
+                self.Astar(state);
+                self.pathLength;
+                self.pathLength/prevPathLength;
+            end
             
             
             %possibly seperate full replanning method after mode change
@@ -113,11 +162,6 @@ classdef plan < handle
                 newDist = sqrt(sum((self.tree.points - targPoint).^2,2));
                 [tarDist, nearestPointIndex] = min(newDist);
                 if tarDist < 2*self.ptHorizon
-%                     self.tree.nrP = self.tree.nrP + 1;
-%                     if minTarDist < self.ptHorizon*0.2
-%                         self.target.idx(minTarIdx) = self.tree.nrP;
-%                     end
-                    
                     self.tree.points = [self.tree.points; targPoint];
                     self.tree.nrP = self.tree.nrP + 1;
                     self.tree.adj(nearestPointIndex, self.tree.nrP)  = 1;
@@ -135,8 +179,7 @@ function buildTreeStar(self, poles)
             nP = self.tree.nrP;
             self.tree.adj = sparse(row,col,v, nP+self.iters, nP+self.iters, nP+self.iters^2);
             
-            distFromInit = 0;
-            parents = 0;
+
             
 %             %%%
 %             figure(40); clf;
@@ -178,12 +221,12 @@ function buildTreeStar(self, poles)
 %                     %%%
                     
                     % find nearby point with smallest distance to start
-                    [minDist] = min(distFromInit(nearPointsLdx));
-                    %[~, minDistIdx] = min(distFromInit(nearPointsLdx))
+                    [minDist] = min(self.tree.distFromInit(nearPointsLdx));
+                    %[~, minDistIdx] = min(self.tree.distFromInit(nearPointsLdx))
                     
                     %%% this is bad, and connects to some other point,
                     %%% which happens to have the same distance
-                    smartPointIdx = find(distFromInit == minDist & nearPointsLdx); % TODO maybe improve
+                    smartPointIdx = find(self.tree.distFromInit == minDist & nearPointsLdx); % TODO maybe improve
                     % TODO maker smarter
                     smartPointIdx = smartPointIdx(1);
                     smartPoint = self.tree.points(smartPointIdx, :);
@@ -204,9 +247,9 @@ function buildTreeStar(self, poles)
                     self.tree.adj(self.tree.nrP, nearestPointIndex)  = 1;
                     
                     % update parents and distances
-                    parents = [parents, nearestPointIndex];
-                    newPointDistInit = distFromInit(nearestPointIndex) + newDist(nearestPointIndex);
-                    distFromInit = [distFromInit, newPointDistInit];
+                    self.tree.parents = [self.tree.parents, nearestPointIndex];
+                    newPointDistInit = self.tree.distFromInit(nearestPointIndex) + newDist(nearestPointIndex);
+                    self.tree.distFromInit = [self.tree.distFromInit, newPointDistInit];
                     
 %                     %%%
 %                     figure(40)
@@ -224,7 +267,7 @@ function buildTreeStar(self, poles)
                     % refactor nearby points now
                     proposedDistance = newPointDistInit + newDist;
                     
-                    betterOptions = proposedDistance < distFromInit(1:end-1);
+                    betterOptions = proposedDistance < self.tree.distFromInit(1:end-1);
                     newChildren = betterOptions & nearPointsLdx;
                     
                     if any(newChildren)
@@ -241,10 +284,10 @@ function buildTreeStar(self, poles)
                                 self.tree.adj(toChangeIdx, self.tree.nrP) = 1;
                                 self.tree.adj(self.tree.nrP, toChangeIdx) = 1;
                                 
-                                self.tree.adj(toChangeIdx, parents(toChangeIdx)) = 0;
-                                self.tree.adj(parents(toChangeIdx), toChangeIdx) = 0;
-                                parents(toChangeIdx) = self.tree.nrP;
-                                distFromInit(toChangeIdx) = proposedDistance(toChangeIdx);
+                                self.tree.adj(toChangeIdx, self.tree.parents(toChangeIdx)) = 0;
+                                self.tree.adj(self.tree.parents(toChangeIdx), toChangeIdx) = 0;
+                                self.tree.parents(toChangeIdx) = self.tree.nrP;
+                                self.tree.distFromInit(toChangeIdx) = proposedDistance(toChangeIdx);
                             end
                         end
                         
@@ -257,21 +300,19 @@ function buildTreeStar(self, poles)
             
             % include targets in point list
             for i = 1:length(self.target.coords)
-                targPoint = self.target.coords(i,:);
+            targPoint = self.target.coords(i,:);
                 newDist = sqrt(sum((self.tree.points - targPoint).^2,2));
                 [tarDist, nearestPointIndex] = min(newDist);
                 if tarDist < 2*self.ptHorizon
-%                     self.tree.nrP = self.tree.nrP + 1;
-%                     if minTarDist < self.ptHorizon*0.2
-%                         self.target.idx(minTarIdx) = self.tree.nrP;
-%                     end
-                    
                     self.tree.points = [self.tree.points; targPoint];
                     self.tree.nrP = self.tree.nrP + 1;
                     self.tree.adj(nearestPointIndex, self.tree.nrP)  = 1;
                     self.tree.adj(self.tree.nrP, nearestPointIndex)  = 1;
                     self.target.idx(i) = self.tree.nrP;
-                end   
+                    self.tree.parents = [self.tree.parents, nearestPointIndex];
+                    newPointDistInit = self.tree.distFromInit(nearestPointIndex) + newDist(nearestPointIndex);
+                    self.tree.distFromInit = [self.tree.distFromInit, newPointDistInit];
+                end
             end    
         end
 
@@ -347,7 +388,8 @@ function buildTreeStar(self, poles)
                     end
                 end
             end
-            [~, minIdx] = min(pathCandsLength);
+           
+            [self.pathLength, minIdx] = min(pathCandsLength);
             self.path = pathCands{minIdx};
         end
             
@@ -367,8 +409,8 @@ function buildTreeStar(self, poles)
         end
         
         function candPoint = spaceSample(self)
-            x = rand(1)*diff(self.area(1,:)) + self.area(1,1);
-            y = rand(1)*diff(self.area(2,:)) + self.area(2,1);
+            x = rand(1)*diff(self.sampleArea(1,:)) + self.sampleArea(1,1);
+            y = rand(1)*diff(self.sampleArea(2,:)) + self.sampleArea(2,1);
             candPoint = [x,y];
         end
         
@@ -376,6 +418,14 @@ function buildTreeStar(self, poles)
             m = size(self.target.coords,1);
             which = randi(m);
             candPoint = self.target.coords(which,:);
+        end
+        
+        function updateSampleArea(self,widthScale)
+            if widthScale < 1
+                self.sampleArea(2,:)=widthScale*self.area(2,:);
+            else 
+                self.sampleArea(2,:)=self.area(2,:);
+            end
         end
         
     end
