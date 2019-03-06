@@ -25,13 +25,15 @@ gamma = atan2(RT_r(2, 1), RT_r(1, 1));
 % forward error
 for_error = RT_r(1, 1);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-if abs(gamma) > 0.1
+max_gamma_for_gain_reduction = 0.1;
+if abs(gamma) > max_gamma_for_gain_reduction % pi/16
     
-    gain_forward = 0.1;
+    gain_forward = max_gain_forward/(abs(gamma) / max_gamma_for_gain_reduction);
     gain_intercpt = max_gain_intercpt;
     
 else
-    gain_intercpt = 0.1;
+    % gain_intercpt = 0.1;
+    gain_intercpt = max_gain_intercpt/(abs(gamma) / max_gamma_for_gain_reduction);
     gain_forward = max_gain_forward;
 end
 

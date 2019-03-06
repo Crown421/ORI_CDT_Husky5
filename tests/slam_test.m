@@ -33,8 +33,14 @@ pause(3); % Give mexmoos a chance to connect (important!)
 % wheel_od = cell(1,n);
 i = 0;
 record = 1;
+
+state = zeros(3, 1);
+P = diag([0.1, 0.1, 0.1]);
+bufferLength = 20;
 % Main loop
 while true % <n
+    % make a counter
+    i = i+1;
     % Fetch latest messages from mex-moos
     mailbox = mexmoos('FETCH');
     scan = GetLaserScans(mailbox, config.laser_channel, true);
@@ -43,7 +49,7 @@ while true % <n
                                       config.wheel_odometry_channel, ...
                                       true);
     if record                           
-        i = i+1;
+        
         scans{i} = scan;
         st_images{i} = stereo_images;
         wheel_od{i} = wheel_odometry;
@@ -64,8 +70,39 @@ while true % <n
     subplot(1, 3, 3);
     ShowStereoImage(UndistortStereoImage(stereo_images, ...
                                          config.camera_model));
+   
+    % collect sensors
+    i_modded = mod(i, bufferLength-1)+1;
+    wheel_str(i_modded) = wheel_odometry;
+    
+    if i <= 1
+        wheel_str = repmat(wheel_odometry, 1, bufferLength);
+    end
+    % time stamp of the scan 
+    scan_time_stamp = scan.timestamp;
+    % estiamtes the change in pose as input velocities using wheel odometry
+    u_odom = u_estimat_odom(wheel_str, scan_time_stamp);
+
+    if mod(i, 10)==0
+        stereo_images = GetStereoImages(mailbox, config.stereo_channel, true);
+        % targetLocation = FindTarget(stereo_images);
+    end
+    
+    % lidar processing
+    range_bearing_Poles = get_Poles_from_SCAN(scan);
+    
+    % slam
+%     observedPoles = SLAMDataAssociations(x, candidatePoles);
+%     [estState, estP] = SLAMMeasurement(observedPoles, state, P);
+    [state, P] = SLAMUpdate(u_odom, range_bearing_Poles, state, P);
+    
+    state_cell{i} = state;
+    P_cell{i} = P;
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
     pause(0.1); % don't overload moos w/commands
+    
 end
 
 %%

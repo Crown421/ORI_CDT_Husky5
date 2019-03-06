@@ -1,22 +1,22 @@
 
-Ts = 0.1;
+Ts = 0.01;
 
 time_out = 20;
 no_steps = time_out/Ts;
 
 x_robot = zeros(3, no_steps);
-x_robot(3, 1) = 0.1;
+x_robot(3, 1) = 0.0;
 
 u_robot = x_robot(1:2, :);
 gamma = x_robot(1, :);
 for_error = gamma;
 
-target_pose = [-1; 5; 0.1];
+target_pose = [2; 0.8; 0.1];
 
 figure
 for k = 1 : no_steps-1
     
-    [u_ctrl, gamma(:, k), for_error(:, k)] = pid_ctrl(target_pose, x_robot(:, k), 0.5, 0.5);
+    [u_ctrl, gamma(:, k), for_error(:, k)] = pid_ctrl(target_pose, x_robot(:, k), 1.0, 0.4);
 %     u_ctrl = [0.1; 0.1];
     
     u_robot(:, k) = u_ctrl;
@@ -33,7 +33,7 @@ for k = 1 : no_steps-1
     plot(target_pose(2), target_pose(1), 'bx')
     
     % hold off
-    pause(0.01)
+    % pause(0.01)
     
    
 end
