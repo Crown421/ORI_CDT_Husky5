@@ -14,7 +14,7 @@ currentMode = 0;
 state = zeros(3, 1);
 P = diag([0.1, 0.1, 1.0]);
 bufferLength = 20;
-target_pose = [3; -1; 0];
+target_pose = [2; 0; 0];
 poles = [];
 area = [0,5; -4,4];
 
@@ -22,7 +22,7 @@ rPlan = plan(state', area);
 rPlan.buildTree(poles);
 rPlan.Astar(state');
 
-goalState=[0; 0];
+goalState=target_pose(1:2)';
 goalJitter = 0.1;
 
 previous_time = [];
@@ -102,29 +102,29 @@ while true % <n
 %         % targetLocation = FindTarget(stereo_images);
 %     end
 
-%     if ~isempty(cam)
-%         [true_dist, bearing] = targetDetector(cam);
-%         
-%         bearing = bearing/180*pi;
-%         
-%         [b_target, a_target] = pol2cart(bearing, true_dist);
-%         
-%         %TO DO: takeout when taarget detector is fixed
-%         if ~isreal(true_dist)
-%             true_dist = Inf;
-%         end
-%         if true_dist < Inf 
-%         
-%             target_pose = state(1:2) + robot_coords_world(state(3))*[-a_target; b_target];
-%             target_pose = [target_pose; 0];
-%         end
-%         
-%     end
+    if ~isempty(cam)
+        [true_dist, bearing] = targetDetector(cam);
+        
+        bearing = bearing/180*pi;
+        
+        [b_target, a_target] = pol2cart(bearing, true_dist);
+        
+        %TO DO: takeout when taarget detector is fixed
+        if ~isreal(true_dist)
+            true_dist = Inf;
+        end
+        if true_dist < Inf 
+        
+            target_pose = state(1:2) + robot_coords_world(state(3))*[-a_target; b_target];
+            target_pose = [target_pose; 0];
+        end
+        
+    end
     
     %
     if ~isempty(previous_time)
         % time for control input is in seconds
-        time_for_ctrl_s = milliseconds(current_time - previous_time)*1e3;
+        time_for_ctrl_s = milliseconds(current_time - previous_time)*1e-3;
     else
         time_for_ctrl_s = 0.05;
     end
@@ -149,7 +149,9 @@ while true % <n
     end
     
      % put the route planner here:
+
     if currentMode ~= 1
+        
         flatPoles = state(4:end);
         poles = reshape(flatPoles, 2, []);
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -199,7 +201,7 @@ while true % <n
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     disp(seq);
     
-    pause(0.05); % don't overload moos w/commands
+    pause(0.1); % don't overload moos w/commands
     
 end
 
