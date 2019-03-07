@@ -5,6 +5,11 @@ function collision = checkCollision(sourceNode, targetNode, poles, r)
 %   vectors (1,2)
 %   Also, pole radius is currently hardcoded to 0.1
 
+if isempty(poles)
+    collision = 0 ;
+    return
+end
+
 lineSeg = [sourceNode; targetNode];
 % assume poles in (2,n)
 % TODO check radius

@@ -10,7 +10,7 @@ classdef plan < handle
         sampleArea
         mode %initialise as targetMode enum
         area
-        radius = 0.2;
+        radius = 0.3;
         iters = 500;
         goalBias = 0.4;
         ptHorizon = 0.4;
@@ -91,21 +91,29 @@ classdef plan < handle
             %   Replan if new poles or the target have shown up
             
             %initalPlan
-            self.goalCounter = 2;
+            
             self.tree.points = state(1:2);
             self.tree.adj = sparse(0);
             self.tree.nrP = 1;
             widthScale = .2;
-            self.updateSampleArea(widthScale)
-            self.buildTreeStar(poles)
-            self.Astar(state);
             prevPathLength = intmax;
             iterCount = 1;
-
+            self.tree.distFromInit = [0];
+            self.tree.parents = [0];
+            self.goalCounter = 2;
+            self.updateSampleArea(widthScale)
             
+            
+            
+            self.buildTreeStar(poles)
+            self.Astar(state);
+
+              
+
             %improve until convergence
             while(self.pathLength/prevPathLength<self.converge && iterCount<20)
-                iterCount=iterCount+1
+                
+                iterCount=iterCount+1;
                 prevPathLength = self.pathLength;
                 self.updateSampleArea(widthScale*iterCount)
                 self.buildTreeStar(poles)
@@ -219,6 +227,8 @@ function buildTreeStar(self, poles)
 %                     plot(self.tree.points(nearPointsLdx,1), self.tree.points(nearPointsLdx,2), 'yo')
 %                     % pause(0.2)
 %                     %%%
+                    %disp(size(self.tree.points))
+                    %disp(size(self.tree.distFromInit))
                     
                     % find nearby point with smallest distance to start
                     [minDist] = min(self.tree.distFromInit(nearPointsLdx));
@@ -269,10 +279,10 @@ function buildTreeStar(self, poles)
                     
                     betterOptions = proposedDistance < self.tree.distFromInit(1:end-1);
                     newChildren = betterOptions & nearPointsLdx;
-                    
+
                     if any(newChildren)
                         for toChangeIdx = find(newChildren)
-                            if ~checkCollision(self.tree.points(toChangeIdx,:), newPoint,poles, self.radius)
+                            if  ~checkCollision(self.tree.points(toChangeIdx,:), newPoint,poles, self.radius)
                                 
 %                                 %%%
 %                                 x = [self.tree.points(toChangeIdx, 1)'; self.tree.points(self.tree.nrP,1)'];
@@ -293,7 +303,6 @@ function buildTreeStar(self, poles)
                         
                         
                     end
-                    plot(self.tree.points(:,1), self.tree.points(:,2), 'ro')
                     
                 end
             end
@@ -391,6 +400,29 @@ function buildTreeStar(self, poles)
            
             [self.pathLength, minIdx] = min(pathCandsLength);
             self.path = pathCands{minIdx};
+            
+            figure(5); clf;
+            hold on
+            targetLine = plot(self.area(1,[2,2]), self.area(2,:), 'LineWidth',6);
+            targetLine.Color(4) = 0.5;
+            %plot(poles(1,:), poles(2,:), 'o')
+            axis equal
+            xlim(self.area(1,:)+[0,1])
+            ylim(self.area(2,:))
+            
+            scatter(self.tree.points(:,1), self.tree.points(:,2), 10, 'filled');
+            [I,J] = ind2sub(size(self.tree.adj), find(triu(self.tree.adj,1)));
+            x = [self.tree.points(I, 1)'; self.tree.points(J,1)'];
+            y = [self.tree.points(I, 2)'; self.tree.points(J,2)'];
+            line(x, y, 'Color', [0.4 0.4 0.4 0.4]);
+            plot(self.target.coords(1), self.target.coords(2), 'o')
+            
+            %
+            srcidx = self.path(1:end-1);
+            tgtidx = self.path(2:end);
+            x = [self.tree.points(srcidx, 1)'; self.tree.points(tgtidx,1)'];
+            y = [self.tree.points(srcidx, 2)'; self.tree.points(tgtidx,2)'];
+            line(x, y, 'Color', [0.4 0.4 0.4 1], 'LineWidth', 3);
         end
             
             

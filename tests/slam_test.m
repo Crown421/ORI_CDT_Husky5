@@ -9,10 +9,22 @@ scanSeq = 0;
 odomSeq = 0;
 camSeq = 0;
 
+
+
 state = zeros(3, 1);
 P = diag([0.1, 0.1, 1.0]);
 bufferLength = 20;
 target_pose = [3; -1; 0];
+poles = [];
+area = [0,5; -4,4];
+
+rPlan = plan(state', area);
+rPlan.buildTree(poles);
+rPlan.Astar(state');
+
+goalState=[0; 0];
+goalJitter = 0.1;
+
 % Main loop
 while true % <n
     % make a counter
@@ -77,7 +89,6 @@ while true % <n
                         
     end
 
-    
     range_bearing_Poles = get_Poles_from_SCAN(scan);
 
 %     if mod(seq, 10)==0
@@ -87,9 +98,16 @@ while true % <n
 
     if ~isempty(cam)
         [true_dist, bearing] = targetDetector(cam);
+        
+        bearing = bearing/180*pi;
+        
         [b_target, a_target] = pol2cart(bearing, true_dist);
         
-        if ~isnan(true_dist)
+        %TO DO: takeout when taarget detector is fixed
+        if ~isreal(true_dist)
+            true_dist = Inf;
+        end
+        if true_dist < Inf 
         
             target_pose = state(1:2) + robot_coords_world(state(3))*[-a_target; b_target];
             target_pose = [target_pose; 0];
@@ -101,21 +119,21 @@ while true % <n
     [state, P] = SLAMUpdate(u_odom', range_bearing_Poles, state, P);
     
      % put the route planner here:
-    if false
+    if true
         
-        robotloc = state(1:2);
-        robotYaw = state(3);
+        robotloc = state(1:2)';
+        robotYaw = state(3)';
         flatPoles = state(4:end);
         poles = reshape(flatPoles, 2, []);
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         %planner
         replan = false;
         %update goal if new target found
-        if targetDistace < Inf
+        if true_dist < Inf 
             %TO DO: calculate world position of target
-            newGoalState = ?targetPose
+            newGoalState = target_pose(1:2)';
             %update goal and replan
-            if (newGoalState(1) ~= goalState(1) || newGoalState(2) ~= goalState(2))
+            if sqrt(sum((newGoalState - goalState).^2,2)) > goalJitter
                 goalState=newGoalState;
                 rPlan.updateGoal(goalState);
                 replan = true;
@@ -124,11 +142,13 @@ while true % <n
         
         %replan every 10 loops
         if (mod(seq, 10)==5 || replan )
-            rPlan.replanConverge(poles);
-            rPlan.Astar(state);
+            rPlan.replanConverge(robotloc, poles);
+            rPlan.Astar(robotloc);
+            figure(5)
+            viscircles(poles', rPlan.radius*ones(1,length(poles)));
         end
         % find next goal
-        goal = rPlan.findGoal(state);
+        goal = rPlan.findGoal(robotloc);
        
     end
     
