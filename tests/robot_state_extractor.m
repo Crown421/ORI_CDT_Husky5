@@ -30,11 +30,12 @@ for k = 1: length(state_cell)
            'Curvature', 1)
        
    end
+   title(num2str(k))
    
    ylim([-5, 5])
-   xlim([-5, 5])
+   xlim([0, 10])
    hold off
    
-   pause(0.1)
+   pause(0.0001)
     
 end
