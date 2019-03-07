@@ -25,8 +25,14 @@ rPlan.Astar(state');
 goalState=[0; 0];
 goalJitter = 0.1;
 
+previous_time = [];
+uctrl = zeros(2, 1);
+
 % Main loop
 while true % <n
+    % get current time for MAP estimator
+    current_time = datetime('now');
+   
     % make a counter
     seq = seq+1;
     % Fetch latest messages from mex-moos
@@ -96,30 +102,41 @@ while true % <n
 %         % targetLocation = FindTarget(stereo_images);
 %     end
 
-    if ~isempty(cam)
-        [true_dist, bearing] = targetDetector(cam);
-        
-        bearing = bearing/180*pi;
-        
-        [b_target, a_target] = pol2cart(bearing, true_dist);
-        
-        %TO DO: takeout when taarget detector is fixed
-        if ~isreal(true_dist)
-            true_dist = Inf;
-        end
-        if true_dist < Inf 
-        
-            target_pose = state(1:2) + robot_coords_world(state(3))*[-a_target; b_target];
-            target_pose = [target_pose; 0];
-        end
-        
-    end
+%     if ~isempty(cam)
+%         [true_dist, bearing] = targetDetector(cam);
+%         
+%         bearing = bearing/180*pi;
+%         
+%         [b_target, a_target] = pol2cart(bearing, true_dist);
+%         
+%         %TO DO: takeout when taarget detector is fixed
+%         if ~isreal(true_dist)
+%             true_dist = Inf;
+%         end
+%         if true_dist < Inf 
+%         
+%             target_pose = state(1:2) + robot_coords_world(state(3))*[-a_target; b_target];
+%             target_pose = [target_pose; 0];
+%         end
+%         
+%     end
     
+    %
+    if ~isempty(previous_time)
+        % time for control input is in seconds
+        time_for_ctrl_s = milliseconds(current_time - previous_time)*1e3;
+    else
+        time_for_ctrl_s = 0.05;
+    end
+    % map update of change of input
+    u_MAP = u_MAP_estiamte(u_odom', uctrl, state, time_for_ctrl_s);
+    
+    u_map_cell{seq} = u_MAP;
     % slam build map first
-    [state, P] = SLAMUpdate(u_odom', range_bearing_Poles, state, P);
+    [state, P] = SLAMUpdate(u_MAP, range_bearing_Poles, state, P);
     
      % put the route planner here:
-    if true
+    if false
         
         robotloc = state(1:2)';
         robotYaw = state(3)';
@@ -155,12 +172,15 @@ while true % <n
     
     % control stuff 
     uctrl = pid_ctrl(target_pose, state(1:3), 1.0, 0.5);
-    u_contrl_cell{seq} = uctrl;
     
     vel = uctrl(1, 1);
     omega = uctrl(2, 1);
     
     SendSpeedCommand( vel, omega, config.control_channel)
+    % update previous time to new current time
+    previous_time = datetime('now');
+    
+    u_contrl_cell{seq} = uctrl;
     
     state_cell{seq} = state;
     P_cell{seq} = P;
@@ -168,6 +188,7 @@ while true % <n
     SLAMvisualization(state, P, target_pose)
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     disp(seq);
+    
     pause(0.05); % don't overload moos w/commands
     
 end

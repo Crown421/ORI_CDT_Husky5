@@ -7,6 +7,7 @@ classdef plan < handle
         path
         pathLength
         target
+        nTargets
         sampleArea
         mode %initialise as targetMode enum
         area
@@ -35,9 +36,9 @@ classdef plan < handle
             self.sampleArea = area;
             self.path = [];
             self.pathLength = -1;
-            nTargets = 6;
-            self.target.coords = [self.area(1,2)*ones(nTargets,1),linspace(self.area(2,1)*0.7, self.area(2,2)*0.7, nTargets)'] ;
-            self.target.idx = zeros(1,nTargets);
+            self.nTargets = 6;
+            self.target.coords = [self.area(1,2)*ones(self.nTargets,1),linspace(self.area(2,1)*0.7, self.area(2,2)*0.7, self.nTargets)'] ;
+            self.target.idx = zeros(1,self.nTargets);
             self.mode = targetMode.findTarget;
             self.goalCounter = 2;
 
@@ -68,8 +69,9 @@ classdef plan < handle
         
         
         function updateGoal(self, goals)
+            [self.nTargets,~] = size(goals);
             self.target.coords = goals;
-            self.target.idx = zeros(1,length(goals));
+            self.target.idx = zeros(1,self.nTargets);
             
         end
         
@@ -200,7 +202,7 @@ function buildTreeStar(self, poles)
 %             %%%
             
             for i = 1:self.iters
-                candPoint = self.sample(self.goalBias, []);
+                candPoint = self.sample(self.goalBias, [])
                 
                 % find closest oint
                 dist = sqrt(sum((self.tree.points - candPoint).^2,2));
@@ -336,9 +338,9 @@ function buildTreeStar(self, poles)
         function Astar(self, state)
             % accessing columns is much faster
             
-            nTargets = size(self.target.coords,1);
-            pathCands = cell(1,nTargets);
-            pathCandsLength = nan(1,nTargets);
+            self.nTargets = size(self.target.coords,1);
+            pathCands = cell(1,self.nTargets);
+            pathCandsLength = nan(1,self.nTargets);
             
             for candTargetIdx = find(self.target.idx>0)
                 
