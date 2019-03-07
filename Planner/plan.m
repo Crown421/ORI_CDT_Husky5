@@ -15,7 +15,8 @@ classdef plan < handle
         goalBias = 0.4;
         ptHorizon = 0.4;
         converge = 0.9999;
-        goalCounter
+        goalTrigger = .1;
+        goalCounter = 2;
         %tooClose = 0.2;
     end
     
@@ -51,18 +52,17 @@ classdef plan < handle
             %dist = sqrt(sum((candGoals - state(1:2)).^2,2));
             %[~, nextGoalIdx] = min(dist);
             %nextGoal = candGoals(nextGoalIdx);
-            %robotLoc = [state(1), state(2)];
-            %lastGoalIndex=self.path(self.goalCounter);
-            %lastGoal = self.tree.points(lastGoalIndex,:);
-            %futureGoal = self.tree.points(self.path(self.goalCounter+1),:);
-            %distToLastGoal = sqrt(sum((lastGoal - robotLoc).^2,2));
-            %distToFutureGoal = sqrt(sum((futureGoal - robotLoc).^2,2));
-            %if distToFutureGoal < distToLastGoal
-            %    nextGoal=self.tree.points(self.goalCounter+1,:);
-            %    self.goalCounter=self.goalCounter+1;
-            %else
-            %    nextGoal=self.tree.points(self.goalCounter,:);
-            %end
+            robotLoc = [state(1), state(2)];
+            lastGoalIndex=self.path(self.goalCounter-1);
+            lastGoal = self.tree.points(lastGoalIndex,:);
+            currentGoal = self.tree.points(self.path(self.goalCounter),:);
+            distToCurrentGoal = sqrt(sum((currentGoal - robotLoc).^2,2));
+            if distToCurrentGoal < self.goalTrigger*(sqrt(sum((lastGoal - currentGoal).^2,2)))
+                nextGoal=self.tree.points(self.path(self.goalCounter+1),:);
+                self.goalCounter=self.goalCounter+1;
+            else
+                nextGoal=currentGoal;
+            end
             %self.goalCounter
         end
         
