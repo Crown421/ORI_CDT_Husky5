@@ -29,24 +29,22 @@ while true % <n
                                   
     if ~isempty(scan)
         if record
-            scans(scanSeq) = scan;
             scanSeq = scanSeq + 1;
+            scans(scanSeq) = scan;
         end 
     end
     
     if ~isempty(cam)
         if record
-            cams(camSeq) = cam;
             camSeq = camSeq + 1;
+            cams(camSeq) = cam;
         end 
     end
     
-    modIodom = mod(odomSeq, bufferLength-1)+1;
     if ~isempty(odom)
-        buffer_odom(modIodom) = odom;
         if record
-            odoms(odomSeq) = odom;
             odomSeq = odomSeq + 1;
+            odoms{odomSeq} = odom;
         end 
     end
    
@@ -88,17 +86,17 @@ while true % <n
 %     end
     
     % slam
-    [state, P] = SLAMUpdate(u_odom, range_bearing_Poles, state, P);
+    [state, P] = SLAMUpdate(u_odom', range_bearing_Poles, state, P);
     
     state_cell{seq} = state;
     P_cell{seq} = P;
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    
+    disp(seq);
     pause(0.05); % don't overload moos w/commands
     
 end
 
 %%
-% save('Test_measurements', 'scans', 'wheel_od', 'st_images')
+% save('data_Wed1', 'state_cell', 'P_cell', 'scans', 'cams', 'odoms' )
 
