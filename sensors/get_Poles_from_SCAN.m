@@ -19,7 +19,7 @@ if ~isempty(scan)
     for j = 1:numel(pole_indices)
        midpoint = object_ranges_midpoints(pole_indices(j));
        poles(1,j) = xs(midpoint);
-       poles(2,j) = ys(midpoint);
+       poles(2,j) = -1*ys(midpoint);
     end
     
     [bearings, ranges] = cart2pol(poles(1, :), poles(2, :));

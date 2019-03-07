@@ -10,9 +10,9 @@ odomSeq = 0;
 camSeq = 0;
 
 state = zeros(3, 1);
-P = diag([0.1, 0.1, 0.1]);
+P = diag([0.1, 0.1, 1.0]);
 bufferLength = 20;
-
+target_pose = [3; -1; 0];
 % Main loop
 while true % <n
     % make a counter
@@ -84,6 +84,22 @@ while true % <n
 %         cam = GetStereoImages(mailbox, config.stereo_channel, true);
 %         % targetLocation = FindTarget(stereo_images);
 %     end
+
+    if ~isempty(cam)
+        [true_dist, bearing] = targetDetector(cam);
+        [a_target, b_target] = pol2cart(bearing, true_dist);
+        
+        target_pose = state(1:2) + robot_coords_world(state(3))*[a_target; b_target];
+        target_pose = [target_pose; 0];
+    end
+    
+    uctrl = pid_ctrl(target_pose, state(1:3), 1.0, 0.5);
+    u_contrl_cell{seq} = uctrl;
+    
+    vel = uctrl(1, 1);
+    omega = uctrl(2, 1);
+    
+    SendSpeedCommand( vel, omega, config.control_channel)
     
     % slam
     [state, P] = SLAMUpdate(u_odom', range_bearing_Poles, state, P);
@@ -91,6 +107,7 @@ while true % <n
     state_cell{seq} = state;
     P_cell{seq} = P;
     
+    SLAMvisualization(state, P, target_pose)
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     disp(seq);
     pause(0.05); % don't overload moos w/commands
