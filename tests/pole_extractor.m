@@ -1,6 +1,7 @@
 load('6_feb_test_1')
 
 for k = 1 : length(scans)
+    scan = scans{k};
 
     if ~isempty(scan)
         angles = (10:0.5:170)';
@@ -20,7 +21,8 @@ for k = 1 : length(scans)
         for j = 1:numel(pole_indices)
            midpoint = object_ranges_midpoints(pole_indices(j));
            poles(1,j) = xs(midpoint);
-           poles(2,j) = ys(midpoint);
+           % redefine co-ords to robot frame hence *-1
+           poles(2,j) = -1*ys(midpoint);
         end
         figure(1); clf;
         scatter(xs,ys, 10, 'blue')

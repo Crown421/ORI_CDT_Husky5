@@ -19,7 +19,8 @@ if ~isempty(scan)
     for j = 1:numel(pole_indices)
        midpoint = object_ranges_midpoints(pole_indices(j));
        poles(1,j) = xs(midpoint);
-       poles(2,j) = ys(midpoint);
+       % redefine co-ords to robot frame hence *-1
+       poles(2,j) = -ys(midpoint);
     end
     
     [bearings, ranges] = cart2pol(poles(1, :), poles(2, :));
