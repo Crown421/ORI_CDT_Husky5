@@ -8,7 +8,7 @@ record = 1;
 scanSeq = 0;
 odomSeq = 0;
 camSeq = 0;
-
+currentMode = 0;
 
 
 state = zeros(3, 1);
@@ -135,18 +135,28 @@ while true % <n
     % slam build map first
     [state, P] = SLAMUpdate(u_MAP, range_bearing_Poles, state, P);
     
+    robotloc = state(1:2)';
+    robotYaw = state(3)';
+    
+    %determine mode
+    if sqrt(sum((robotLoc - goalState).^2,2)) < 0.2
+        currentMode = 1;
+    elseif sqrt(sum((robotLoc - goalState).^2,2)) < 0.01
+        currentMode = 2;
+        goalState = [0,0];
+        rPlan.updateGoal(goalState);
+        replan = true;
+    end
+    
      % put the route planner here:
-    if false
-        
-        robotloc = state(1:2)';
-        robotYaw = state(3)';
+    if currentMode ~= 1
         flatPoles = state(4:end);
         poles = reshape(flatPoles, 2, []);
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         %planner
         replan = false;
         %update goal if new target found
-        if true_dist < Inf 
+        if currentMode~=2 & true_dist < Inf 
             %TO DO: calculate world position of target
             newGoalState = target_pose(1:2)';
             %update goal and replan
