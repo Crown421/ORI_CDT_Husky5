@@ -87,12 +87,53 @@ while true % <n
 
     if ~isempty(cam)
         [true_dist, bearing] = targetDetector(cam);
-        [a_target, b_target] = pol2cart(bearing, true_dist);
+        [b_target, a_target] = pol2cart(bearing, true_dist);
         
-        target_pose = state(1:2) + robot_coords_world(state(3))*[a_target; b_target];
-        target_pose = [target_pose; 0];
+        if ~isnan(true_dist)
+        
+            target_pose = state(1:2) + robot_coords_world(state(3))*[-a_target; b_target];
+            target_pose = [target_pose; 0];
+        end
+        
     end
     
+    % slam build map first
+    [state, P] = SLAMUpdate(u_odom', range_bearing_Poles, state, P);
+    
+     % put the route planner here:
+    if false
+        
+        robotloc = state(1:2);
+        robotYaw = state(3);
+        flatPoles = state(4:end);
+        poles = reshape(flatPoles, 2, []);
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %planner
+        replan = false;
+        %update goal if new target found
+        if targetDistace < Inf
+            %TO DO: calculate world position of target
+            newGoalState = ?targetPose
+            %update goal and replan
+            if (newGoalState(1) ~= goalState(1) || newGoalState(2) ~= goalState(2))
+                goalState=newGoalState;
+                rPlan.updateGoal(goalState);
+                replan = true;
+            end
+        end
+        
+        %replan every 10 loops
+        if (mod(seq, 10)==5 || replan )
+            rPlan.replanConverge(poles);
+            rPlan.Astar(state);
+        end
+        % find next goal
+        goal = rPlan.findGoal(state);
+       
+    end
+    
+    
+    % control stuff 
     uctrl = pid_ctrl(target_pose, state(1:3), 1.0, 0.5);
     u_contrl_cell{seq} = uctrl;
     
@@ -100,9 +141,6 @@ while true % <n
     omega = uctrl(2, 1);
     
     SendSpeedCommand( vel, omega, config.control_channel)
-    
-    % slam
-    [state, P] = SLAMUpdate(u_odom', range_bearing_Poles, state, P);
     
     state_cell{seq} = state;
     P_cell{seq} = P;
