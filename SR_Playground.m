@@ -99,11 +99,15 @@ plot(colPoles(1, idx), colPoles(2, idx), 'x');
 state = [0,0,0];
 rPlan = plan(state, area);
 %
+tic
 rPlan.buildTreeStar(poles);
+toc
 %%
-rPlan.Astar(state)
-
+tic
+rPlan.Astar([2, -1, 0])
+toc
 %%
+%
 %
 figure(4); clf;
 viscircles(poles', rPlan.radius*ones(1,length(poles)));

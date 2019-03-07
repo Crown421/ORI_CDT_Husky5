@@ -1,17 +1,6 @@
 %% adapted for Wicked Team Name
 
 
-% Example glue-logic file from which you call your implementation of:
-%  (1) Pole Detector
-%  (2) Target Detector
-%  (3) Planner
-%  (4) Controller
-%  -------------------
-%  (5) SLAM [Note: full implementation is provided]
-
-% Add MRG helper functions
-% addpath('mrg'); % COMMENTED OUT
-
 husky_id = 5; % Modify for your Husky
 
 % Get the channel names and sensor IDs for this Husky
