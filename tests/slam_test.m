@@ -17,6 +17,7 @@ bufferLength = 20;
 target_pose = [2; 0; 0];
 poles = [];
 area = [0,5; -4,4];
+true_dist = Inf;
 
 rPlan = plan(state', area);
 rPlan.buildTree(poles);
@@ -27,6 +28,8 @@ goalJitter = 0.1;
 
 previous_time = [];
 uctrl = zeros(2, 1);
+
+fake_carrot = [3, 1, 0];
 
 % Main loop
 while true % <n
@@ -102,7 +105,7 @@ while true % <n
 %         % targetLocation = FindTarget(stereo_images);
 %     end
 
-    if ~isempty(cam)
+    if ~isempty(cam) & mod(seq, 10)==5 
         [true_dist, bearing] = targetDetector(cam);
         
         bearing = bearing/180*pi;
@@ -139,9 +142,9 @@ while true % <n
     robotYaw = state(3)';
     
     %determine mode
-    if sqrt(sum((robotLoc - goalState).^2,2)) < 0.2
+    if sqrt(sum((robotloc - goalState).^2,2)) < 0.2
         currentMode = 1;
-    elseif sqrt(sum((robotLoc - goalState).^2,2)) < 0.01
+    elseif sqrt(sum((robotloc - goalState).^2,2)) < 0.01
         currentMode = 2;
         goalState = [0,0];
         rPlan.updateGoal(goalState);
@@ -177,18 +180,22 @@ while true % <n
             viscircles(poles', rPlan.radius*ones(1,length(poles)));
         end
         % find next goal
-        goal = rPlan.findGoal(robotloc);
+        carrot = rPlan.findGoal(robotloc);
        
     end
     
     
     % control stuff 
-    uctrl = pid_ctrl(target_pose, state(1:3), 1.0, 0.5);
+    uctrl = pid_ctrl(fake_carrot', state(1:3), 1.0, 0.5);
     
     vel = uctrl(1, 1);
     omega = uctrl(2, 1);
     
     SendSpeedCommand( vel, omega, config.control_channel)
+    disp(vel)
+    disp(omega)
+    disp(u_MAP(1))
+    disp(u_MAP(2))
     % update previous time to new current time
     previous_time = datetime('now');
     
@@ -197,11 +204,11 @@ while true % <n
     state_cell{seq} = state;
     P_cell{seq} = P;
     
-    SLAMvisualization(state, P, target_pose)
+    SLAMvisualization(state, P, carrot,target_pose)
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     disp(seq);
     
-    pause(0.1); % don't overload moos w/commands
+    pause(0.2); % don't overload moos w/commands
     
 end
 

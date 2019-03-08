@@ -21,6 +21,9 @@ indices = randsample(num_edges^2, k*num_edges);
 accumulator = zeros(512, 1);
 for i = 1:(k*num_edges)
    first_index = floor(indices(i)/num_edges)+1;
+   if first_index > num_edges
+      first_index = num_edges; 
+   end
    second_index = rem(indices(i), num_edges)+1;
    dist0 = sqrt((edgeRows(first_index) - edgeRows(second_index)).^2 + (edgeCols(first_index) - edgeCols(second_index)).^2);
    if dist0 < dist_threshold

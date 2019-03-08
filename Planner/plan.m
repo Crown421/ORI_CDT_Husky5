@@ -12,9 +12,9 @@ classdef plan < handle
         mode %initialise as targetMode enum
         area
         radius = 0.3;
-        iters = 500;
+        iters = 800;
         goalBias = 0.4;
-        ptHorizon = 0.4;
+        ptHorizon = 0.8;
         converge = 0.9999;
         goalTrigger = .1;
         goalCounter = 2;
@@ -167,7 +167,7 @@ classdef plan < handle
                     
                 end   
             end
-            for i = 1:length(self.target.coords)
+            for i = 1:self.nTargets
                 targPoint = self.target.coords(i,:);
                 newDist = sqrt(sum((self.tree.points - targPoint).^2,2));
                 [tarDist, nearestPointIndex] = min(newDist);
@@ -202,7 +202,7 @@ function buildTreeStar(self, poles)
 %             %%%
             
             for i = 1:self.iters
-                candPoint = self.sample(self.goalBias, [])
+                candPoint = self.sample(self.goalBias, []);
                 
                 % find closest oint
                 dist = sqrt(sum((self.tree.points - candPoint).^2,2));
@@ -310,7 +310,7 @@ function buildTreeStar(self, poles)
             end
             
             % include targets in point list
-            for i = 1:length(self.target.coords)
+            for i = 1:length(self.nTargets)
             targPoint = self.target.coords(i,:);
                 newDist = sqrt(sum((self.tree.points - targPoint).^2,2));
                 [tarDist, nearestPointIndex] = min(newDist);

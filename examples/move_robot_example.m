@@ -16,14 +16,13 @@ husky_config = GetHuskyConfig(husky_id);
 clear mexmoos;
 client = ['ExampleCdtClient' num2str(int32(rand*1e7))];
 mexmoos('init', 'SERVERHOST', husky_config.host, 'MOOSNAME', client, 'SERVERPORT','9000');
-pause(1.0); % give mexmoos a chance to connect (important!)
+pause(3.); % give mexmoos a chance to connect (important!)
 
 % First tell it not to move at all
 SendSpeedCommand(0, 0, husky_config.control_channel)
 
 i = 0;
-
-velocity = 0.0;
+velocity = 0.5;
 
 while true
     disp('Send command');

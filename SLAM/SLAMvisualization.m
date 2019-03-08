@@ -1,4 +1,4 @@
-function SLAMvisualization(state, P, target, fig)
+function SLAMvisualization(state, P, carrot, target, fig)
 %SLAMVISUALIZATION Summary of this function goes here
 %   Detailed explanation goes here
     
@@ -46,6 +46,8 @@ function SLAMvisualization(state, P, target, fig)
        
    end
    %title(num2str(k))
+   
+   plot(carrot(1), carrot(2), 'rx', 'MarkerSize', 16);
    
    ylim([-5, 5])
    xlim([-1, 8])
