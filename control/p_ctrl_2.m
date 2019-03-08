@@ -1,4 +1,4 @@
-function [uctrl, gamma, for_error] = pid_ctrl(target_pose, current_pose_wrld, max_gain_intercpt, max_gain_forward)
+function [uctrl, gamma, for_error] = p_ctrl_2(target_pose, current_pose_wrld, max_gain_intercpt, max_gain_forward)
 %
 % take a target pose in the world co-ordinates and give linear and yaw
 % velocities in the robot's frame of reference
@@ -30,23 +30,24 @@ if abs(gamma) > max_gamma_for_gain_reduction % pi/16
     
     gain_forward = max_gain_forward/(abs(gamma) / max_gamma_for_gain_reduction);
     gain_intercpt = max_gain_intercpt;
+    for_vel = gain_forward * for_error;
     
-    
-elseif abs(for_error) < 0.2
+elseif abs(for_error) < 0.4
     
     gain_intercpt = 0.1;
     gain_forward = max_gain_forward;
-    
+    for_vel = gain_forward * for_error;
 % elseif abs(for_error) < 0.2
 %     
 %     gain_intercpt = max_gain_intercpt;
 %     gain_forward = max_gain_forward;
 %     gamma = target_pose(3) - rot_robot;
+%     for_vel = gain_forward * for_error;
     
 else
     % gain_intercpt = 0.1;
     gain_intercpt = max_gain_intercpt/(abs(gamma) / max_gamma_for_gain_reduction);
-    gain_forward = max_gain_forward;
+    for_vel = 0.5;
 end
 
 % if 
@@ -57,7 +58,7 @@ ang_vel = gain_intercpt * gamma;
 %% Find the forward velocity command
 
 % gain_forward = 0.5;
-for_vel = gain_forward * for_error;
+
 
 % return the forward input
 uctrl = [for_vel; ang_vel];

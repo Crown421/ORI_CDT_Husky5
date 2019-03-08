@@ -11,7 +11,7 @@ u_robot = x_robot(1:2, :);
 gamma = x_robot(1, :);
 for_error = gamma;
 
-target_pose = [2; 0.8; 0.1];
+target_pose = [1; 2; 0.1];
 
 figure
 for k = 1 : no_steps-1
@@ -33,7 +33,7 @@ for k = 1 : no_steps-1
     plot(target_pose(2), target_pose(1), 'bx')
     
     % hold off
-%     pause(0.01)
+    pause(0.1)
     
    
 end
